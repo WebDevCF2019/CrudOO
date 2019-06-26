@@ -35,12 +35,12 @@ if (isset($_GET['addstudent'])) {
         if(isset($_POST['idthesection'])){
            
             // insertion de l'étudiant et des sections 
-            $insert = $thestudentM->insertStudentWithSection($student,$_POST['idthesection']);
+            $insert = $thestudentM->insertStudentWithSectionTransaction($student,$_POST['idthesection']);
             
         // on a pas de sections    
         }else{
             // insertion de l'étudiant
-            $insert = $thestudentM->insertStudentWithSection($student);
+            $insert = $thestudentM->insertStudentWithSectionTransaction($student);
         }
         
         if($insert){

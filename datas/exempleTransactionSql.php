@@ -46,9 +46,13 @@ try {
 
     $connexion->commit();
     
+    return true;
+    
 }catch (PDOException $e){
     $connexion->rollBack();
     $erreur = $e->getMessage();
+    
+    return false;
 }
 
 
