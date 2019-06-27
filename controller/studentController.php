@@ -61,6 +61,8 @@ if (isset($_GET['addstudent'])) {
      * on veut supprimer un stagiaire
      */
     $idstagiaire = (int) $_GET['delete'];
+
+
 } else {
 
     /*
