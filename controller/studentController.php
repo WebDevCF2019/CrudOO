@@ -46,7 +46,7 @@ if (isset($_GET['addstudent'])) {
         if($insert){
             header("Location: ./?adminstudent");
         }else{
-            header("Location: ./?adminstudent&addstudent");
+            //header("Location: ./?adminstudent&addstudent");
         }
         
     }
