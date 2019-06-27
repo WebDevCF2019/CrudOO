@@ -151,11 +151,11 @@ class thestudentManager {
                 // on retire la virgule de fin
                 $sql = substr($sql, 0, -1);
 
-                // on exécute la ou les insertion(s)
+                // on exécute la ou les insertion(s)- lors du commit!
                 $this->db->exec($sql);
             }
 
-            // on envoie la les requêtes au serveur sql
+            // on envoie la ou les requête(s) au serveur sql, si il y a une erreur dans le commit (une des requêtes exécutée renvoie une erreur) on va directement au catch (la ligne return true n'est donc pas lue)
             $this->db->commit();
             // si pas de faute lors du commit, la ligne suivante est lue (renvoie true)
             return true;
@@ -169,6 +169,44 @@ class thestudentManager {
             echo $ex->getMessage();
             return false;
         }
+    }
+
+
+    // on sélectionne les étudiants de la section actuelle grâce à son id
+    public function selectionnerStudentByIDfordelete(int $idsection): array
+    {
+
+        if ($idsection === 0)
+            return [];
+
+        $sql = "SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR '/') as thetile
+        FROM thestudent
+        LEFT JOIN thesection_has_thestudent
+        ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
+
+        LEFT JOIN thesection
+        ON thesection_has_thestudent.thesection_idthesection =thesection.idthesection
+          WHERE  thestudent.idthestudent =?
+        GROUP BY thestudent.idthestudent;";
+
+
+        $recup = $this->db->prepare($sql);
+        $recup->bindValue(1, $idsection, PDO::PARAM_INT);
+        $recup->execute();
+
+        if ($recup->rowCount() === 0)
+            return [];
+
+        return $recup->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteStudentBYI(int $id):void{
+               $sql="DELETE FROM thestudent WHERE idthestudent=?";
+               $req = $this->db->prepare($sql);
+               $req ->bindValue(1,$id, PDO:: PARAM_INT);
+               $req->execute();
+     
+
     }
 
 }

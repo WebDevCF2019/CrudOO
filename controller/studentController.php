@@ -61,11 +61,23 @@ if (isset($_GET['addstudent'])) {
      * on veut supprimer un stagiaire
      */
     $idstagiaire = (int) $_GET['delete'];
+    
+       if(!isset($_GET['ok'])){
+     $recupStudents =$thestudentM->selectionnerStudentByIDfordelete($idstagiaire);
+        //on recupere l'etudiant graca a son ID 
+    // appel de la vue avec le passage des étudiants
+    echo $twig->render("admin/student/deleteAdminStudent.html.twig" , array("user"=>$recupStudents));
+       }else {
+           //on a validé la suppression (exstance de ma variable get "ok )
 
-
+           $thestudentM->deleteStudentBYI($idstagiaire);
+           
+           header("Location: ./?adminstuden");
+           exit();
+       }
 } else {
 
-    /*
+    /* 
      * Page d'accueil
      */
 
