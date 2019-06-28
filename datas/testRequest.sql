@@ -28,6 +28,16 @@ SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' / ') AS thetit
                     LEFT JOIN thesection
                         ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection
                 GROUP BY thestudent.idthestudent;
-        
+
+# on sélectionne l'étidiant avec ses éventuelles sections actuelle grâce à son id
+
+SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' / ') AS thetitle
+	FROM thestudent
+        LEFT JOIN thesection_has_thestudent
+            ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
+        LEFT JOIN thesection
+            ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection        
+    WHERE  thestudent.idthestudent=10
+    GROUP BY thestudent.idthestudent;        
 
   

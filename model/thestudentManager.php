@@ -170,6 +170,10 @@ class thestudentManager {
             return false;
         }
     }
+    
+    
+    // on sélectionne l'étidiant avec ses éventuelles sections actuelle grâce à son id
+    public function selectionnerStudentById(int $idstudent): array {
 
 
     // on sélectionne les étudiants de la section actuelle grâce à son id
@@ -206,7 +210,10 @@ class thestudentManager {
                $req ->bindValue(1,$id, PDO:: PARAM_INT);
                $req->execute();
      
-
+   
     }
+      
+   
+
 
 }

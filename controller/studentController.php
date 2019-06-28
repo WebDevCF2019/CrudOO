@@ -11,7 +11,7 @@
 
 
 if (isset($_GET['addstudent'])) {
-    
+
     /*
      * on veut ajouter un stagiaire
      */
@@ -24,33 +24,30 @@ if (isset($_GET['addstudent'])) {
 
         // appel de la vue avec le passage des sections
         echo $twig->render("admin/student/ajoutAdminStudent.html.twig", ["sections" => $recupSections]);
-    }else{
-        
+    } else {
+
         // le formulaire est envoyé
-            
         // on va instancier la classe thestudent pour hydrater thename et thesurname
         $student = new thestudent($_POST);
-        
+
         // si on a au moins une section
-        if(isset($_POST['idthesection'])){
-           
+        if (isset($_POST['idthesection'])) {
+
             // insertion de l'étudiant et des sections 
-            $insert = $thestudentM->insertStudentWithSectionTransaction($student,$_POST['idthesection']);
-            
-        // on a pas de sections    
-        }else{
+            $insert = $thestudentM->insertStudentWithSectionTransaction($student, $_POST['idthesection']);
+
+            // on a pas de sections    
+        } else {
             // insertion de l'étudiant
             $insert = $thestudentM->insertStudentWithSectionTransaction($student);
         }
-        
-        if($insert){
+
+        if ($insert) {
             header("Location: ./?adminstudent");
-        }else{
+        } else {
             //header("Location: ./?adminstudent&addstudent");
         }
-        
     }
-    
 } elseif (isset($_GET['update']) && ctype_digit($_GET['update'])) {
     $idstagiaire = (int) $_GET['update'];
     /*
@@ -61,20 +58,27 @@ if (isset($_GET['addstudent'])) {
      * on veut supprimer un stagiaire
      */
     $idstagiaire = (int) $_GET['delete'];
-    
-       if(!isset($_GET['ok'])){
-     $recupStudents =$thestudentM->selectionnerStudentByIDfordelete($idstagiaire);
-        //on recupere l'etudiant graca a son ID 
-    // appel de la vue avec le passage des étudiants
-    echo $twig->render("admin/student/deleteAdminStudent.html.twig" , array("user"=>$recupStudents));
-       }else {
-           //on a validé la suppression (exstance de ma variable get "ok )
 
-           $thestudentM->deleteStudentBYI($idstagiaire);
-           
-           header("Location: ./?adminstuden");
-           exit();
-       }
+    // si on a pas validé la suppression
+    if (!isset($_GET['ok'])) {
+
+        // on récupère l'étudiant grâce à son ID
+        $recupStudent = $thestudentM->selectionnerStudentById($idstagiaire);
+        
+        // appel de la vue avec le passage d'un étudiant
+        echo $twig->render("admin/student/deleteAdminStudent.html.twig",array("user"=>$recupStudent));
+        
+        
+    // on a validé la suppression (existance de la variable get "ok")    
+    }else{
+        
+        // suppression (pas de retour avec void: deleteStudentById(int $id):void{...} )
+        $thestudentM->deleteStudentById($idstagiaire);
+        
+        header("Location: ./?adminstudent");
+        exit();
+        
+    }
 } else {
 
     /* 
