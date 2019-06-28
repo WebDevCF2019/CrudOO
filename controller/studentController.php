@@ -66,7 +66,7 @@ if (isset($_GET['addstudent'])) {
         $recupSections = $thesectionM->creerMenu();
         
         // appel de la vue
-        echo $twig->render("admin/student/updateAdminStudent.html.twig",["sections"=>$recupSections]);
+        echo $twig->render("admin/student/updateAdminStudent.html.twig",["sections"=>$recupSections, "student"=>$recupStudent]);
     
     // si le formulaire est envoyé    
     }else{
