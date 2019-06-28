@@ -53,6 +53,26 @@ if (isset($_GET['addstudent'])) {
     /*
      * on veut modifier un stagiaire
      */
+    
+    // affichage du formulaire
+    if(empty($_POST)){
+        
+        // on récupère l'étudiant grâce à son ID
+        $recupStudent = $thestudentM->selectionnerStudentById($idstagiaire);
+        
+        // on utilise la méthode qui prend titre et id de toutes les sections
+        $recupSections = $thesectionM->creerMenu();
+    
+    // si le formulaire est envoyé    
+    }else{
+        
+        
+        
+    }
+    
+       
+    
+    
 } elseif (isset($_GET['delete']) && ctype_digit($_GET['delete'])) {
     /*
      * on veut supprimer un stagiaire
