@@ -58,10 +58,15 @@ if (isset($_GET['addstudent'])) {
     if(empty($_POST)){
         
         // on récupère l'étudiant grâce à son ID
+        // Et l'id des sections pour cocher les sections dans lesquelles l'étudiant se trouve avant l'update
         $recupStudent = $thestudentM->selectionnerStudentById($idstagiaire);
         
-        // on utilise la méthode qui prend titre et id de toutes les sections
+        // on utilise la méthode qui prend titre et id de toutes les sections 
+        // pour afficher toutes les sections possibles pour l'update du stagiaire
         $recupSections = $thesectionM->creerMenu();
+        
+        // appel de la vue
+        echo $twig->render("admin/student/updateAdminStudent.html.twig",["sections"=>$recupSections]);
     
     // si le formulaire est envoyé    
     }else{
