@@ -176,10 +176,7 @@ class thestudentManager {
     public function selectionnerStudentById(int $idstudent): array {
 
 
-
-        if($idstudent===0) return[];
-
-        $sql = "SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' ||| ') AS thetitle
+        $sql = "SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR '|||') AS thetitle, GROUP_CONCAT(thesection.idthesection) AS idthesection
 	FROM thestudent
         LEFT JOIN thesection_has_thestudent
             ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
