@@ -17,26 +17,12 @@
                 <p class="lead">Gestion des étudiants</p>
             </div>
             <div class="col-lg-6 text-left">
-<<<<<<< HEAD
-                <h5 class='mb-4'>Voulez-vous vraiment supprimer le stagiaire</h5>
-                <p>{{ user.thename }} {{ user.thesurname }}</P>
-                <h5> Present dans les section</h5>
-                <p>{{ user.thetitle}} </p>
-<div>
-    <a class="btn  btn-primary" href="?adminstudent&delete={{user.idthestudent}}&ok" type="button">supprimer</a>
-    <a class="btn btn-secondary" href="?adminstudent" type="button">Annuler</a>
-
-                {# Faites apparaître le stagiaire avec ses sections quand il en a #}
-                {# dump(student) #}
-               
-=======
                 <h5 class='mb-4'>Voulez-vous vraiment supprimer le stagiaire :</h5>
                 <p>{{ user.thename }} {{ user.thesurname }}</p>
                 <h5>Présent dans les section(s): </h5>
                 <p>{{ user.thetitle }}</p>
                 <div><a type="button" href="?adminstudent&delete={{ user.idthestudent }}&ok" class="btn btn-primary">Supprimer</a> <a type="button" href="?adminstudent" class="btn btn-secondary">Annuler</a> </div>
                 
->>>>>>> 0413d37e6c5a391f80fd783cf8b4e793b1b0fa28
             </div>
         </div>
     </main>

@@ -19,8 +19,8 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" method="post" name="createSection">
-                    <input name="thename" type="text" placeholder="Le nom" required><br>
-                    <textarea name="thesurname" placeholder="Le prénom" required></textarea><br>
+                    <input name="thename" type="text" placeholder="Le nom" value="{{ student.thename }}" required><br>
+                    <textarea name="thesurname" placeholder="Le prénom" required>{{ student.thesurname }}</textarea><br>
                     {% for item in sections %}
                         <label>{{ item.thetitle }}</label> <input name='idthesection[]' type='checkbox' value='{{ item.idthesection }}'> |
                         {% else %}

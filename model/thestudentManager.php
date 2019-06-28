@@ -230,7 +230,7 @@ class thestudentManager {
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function deleteStudentBYI(int $id):void{
+    public function deleteStudentBYId(int $id):void{
                $sql="DELETE FROM thestudent WHERE idthestudent=?";
                $req = $this->db->prepare($sql);
                $req ->bindValue(1,$id, PDO:: PARAM_INT);
