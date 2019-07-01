@@ -21,10 +21,21 @@
                 <form action="" method="post" name="createSection">
                     <input name="thename" type="text" placeholder="Le nom" value="{{ student.thename }}" required><br>
                     <textarea name="thesurname" placeholder="Le prénom" required>{{ student.thesurname }}</textarea><br>
+                    {# création d'un tableau contenant tous les id des sections dans lesquelles se trouvent le student #}
+                    {% set tableau = student.idthesection|split(',') %}
                     {% for item in sections %}
-                        <label>{{ item.thetitle }}</label> <input name='idthesection[]' type='checkbox' value='{{ item.idthesection }}'> |
+                        {# si l'id de la section est attribuée à l'étudiant (équivalence de in_array en php) #}
+                        {% if item.idthesection in tableau %}
+                            {# on crée une variable pour cocher#}
+                            {% set check = "checked" %}
+                            {% else %}
+                                {# on crée une variable vide #}
+                                {% set check = "" %}
+                            {% endif %}
+                        {# application du checked si nécessaire #}    
+                        <label>{{ item.thetitle }}</label> <input name='idthesection[]' type='checkbox' value='{{ item.idthesection }}' {{ check }}> |
                         {% else %}
-                            
+                            <label>Pas encore de sections</label>
                         {% endfor %}<br>
                     <input type="submit" value="Envoyer">
                 </form>
