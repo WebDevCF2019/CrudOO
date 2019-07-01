@@ -73,7 +73,20 @@ if (isset($_GET['addstudent'])) {
         
          // instanciation de thestudent avec la variable POST (pour utiliser les setters de vérification de donnée)
          $updateStudent = new thestudent($_POST);
-        
+      
+      //si on a coché (ou laissé coché) au moin une section, on remplit $section grâce à une condition ternaire
+
+
+      $section=(isset($_POST['idthesection']))? $_POST['idthesection']:[];
+
+
+           //on appel la fonction qui effectue l'updated'un student (et qui supprime/ajout les section pour cet étudiant)
+
+
+           $upade =$thestudentM->upadateStudentBysection($updateStudent,$section,$idstagiaire);
+      
+               
+
     }
     
        

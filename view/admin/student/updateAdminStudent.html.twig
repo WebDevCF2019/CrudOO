@@ -19,6 +19,7 @@
             <div class="col-lg-6 text-left">
                 {# Affichage du formulaire #}
                 <form action="" method="post" name="createSection">
+                    <input name="idthestudent" type="hidden" value="{{ student.idthestudent }}">
                     <input name="thename" type="text" placeholder="Le nom" value="{{ student.thename }}" required><br>
                     <textarea name="thesurname" placeholder="Le prénom" required>{{ student.thesurname }}</textarea><br>
                     {# création d'un tableau contenant tous les id des sections dans lesquelles se trouvent le student #}

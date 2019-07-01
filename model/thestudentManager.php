@@ -238,8 +238,32 @@ class thestudentManager {
      
    
     }
-      
-   
 
 
-}
+
+
+    public function upadateStudentBysection(thestudent $student, array $sections, int $getidstudent): bool{
+    
+        try{
+
+            $this->db->beginTransaction();
+            $this->db->commit();
+            
+            return true;
+
+        }  catch(PDOException $ex){
+
+
+            echo $ex->getMessage();
+
+          $this->db->rollBack();
+
+
+          return false;
+
+
+
+       }
+       
+    }
+ }
