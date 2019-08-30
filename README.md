@@ -74,6 +74,8 @@ Créez une méthode publique qui va récupérer tous les stagiaires avec les sec
       
   Créez une méthode dans studentManager.php permettant de récupérer un seul stagiaire par son id
   
+  ### Thank You
+  
   Récupérez le stagiaire dans une variable de studentController.php
   
   Affichez cette vue depuis studentController.php **si le formulaire n'est pas envoyé** en twig en passant la variable contenant le stagiaire que l'on veut modifier.  
