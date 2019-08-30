@@ -249,7 +249,7 @@ class thestudentManager {
         
 
         if($getidstudent !=$student->getIdthestudent()) return false;
-  // si un champs n'est pas valide  (vide)
+  // si un champs n'est pas valide  (vide)  on arrête la méthode
 
 
   if(empty($student->getThename())||empty($student->getThesurname())) return false;
