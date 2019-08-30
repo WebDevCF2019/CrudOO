@@ -86,3 +86,8 @@ Créez une méthode publique qui va récupérer tous les stagiaires avec les sec
   
      header("Location: ./?adminstudent")  ;
   Sinon réaffichez le formulaire avec affichage d'une erreur (erreur en option)       
+
+
+### Exercice  2
+
+En cas de suppression d'une section, créez un vue comme pour la suppression de l'étudiant ( deleteAdminStudent.html) , qui obligera de supprimer en 2 étapes
