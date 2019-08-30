@@ -88,6 +88,17 @@ if (isset($_GET['addstudent'])) {
         // on appel la fonction qui effectue l'update d'un student (et qui supprime/ ajoute les sections pour cet étudiant) => argument (thestudent, array, int)
         
         $update = $thestudentM->upadateStudentBysection($updateStudent,$sections,$idstagiaire);
+        if($update){
+
+             header("Location: ./?adminstudent");
+
+
+        }else{
+                    
+            header("Location: ./?adminstudent&update=".$idstagiaire);
+
+
+        }
         
         
     }
