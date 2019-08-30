@@ -38,7 +38,7 @@ if (isset($_GET['disconnect'])) {
      * On veut supprimer une section
      *
      */
-
+   
 
     $deleteId = (int) $_GET['delete'];
 
