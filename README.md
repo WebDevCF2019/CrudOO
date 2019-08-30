@@ -91,3 +91,5 @@ Créez une méthode publique qui va récupérer tous les stagiaires avec les sec
 ### Exercice  2
 
 En cas de suppression d'une section, créez un vue comme pour la suppression de l'étudiant ( deleteAdminStudent.html) , qui obligera de supprimer en 2 étapes
+
+du blabla
