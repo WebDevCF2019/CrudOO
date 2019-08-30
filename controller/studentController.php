@@ -49,7 +49,11 @@ if (isset($_GET['addstudent'])) {
         }
     }
 } elseif (isset($_GET['update']) && ctype_digit($_GET['update'])) {
+    
+    
     $idstagiaire = (int) $_GET['update'];
+    
+    
     /*
      * on veut modifier un stagiaire
      */
@@ -71,22 +75,21 @@ if (isset($_GET['addstudent'])) {
     // si le formulaire est envoyé    
     }else{
         
-         // instanciation de thestudent avec la variable POST (pour utiliser les setters de vérification de donnée)
-         $updateStudent = new thestudent($_POST);
-      
-      //si on a coché (ou laissé coché) au moin une section, on remplit $section grâce à une condition ternaire
-
-
-      $section=(isset($_POST['idthesection']))? $_POST['idthesection']:[];
-
-
-           //on appel la fonction qui effectue l'updated'un student (et qui supprime/ajout les section pour cet étudiant)
-
-
-           $upade =$thestudentM->upadateStudentBysection($updateStudent,$section,$idstagiaire);
-      
-               
-
+        // var_dump($_POST);
+        
+        // instanciation de thestudent avec la variable POST (pour utiliser les setters de vérification de données)
+        $updateStudent = new thestudent($_POST);
+        
+        // var_dump($updateStudent);
+        
+        // si on a coché (ou laissé coché) au moins une section, on remplit $section grâce à une condition ternaire
+        $sections = (isset($_POST['idthesection']))? $_POST['idthesection']: [];
+        
+        // on appel la fonction qui effectue l'update d'un student (et qui supprime/ ajoute les sections pour cet étudiant) => argument (thestudent, array, int)
+        
+        $update = $thestudentM->upadateStudentBysection($updateStudent,$sections,$idstagiaire);
+        
+        
     }
     
        

@@ -243,10 +243,83 @@ class thestudentManager {
 
 
     public function upadateStudentBysection(thestudent $student, array $sections, int $getidstudent): bool{
-    
+        
+
+       //si l'id de l'url ne correspond pas l'id de l'objet (vient d'un POst ) on arrête la méthode 
+        
+
+        if($getidstudent !=$student->getIdthestudent()) return false;
+  // si un champs n'est pas valide  (vide)
+
+
+  if(empty($student->getThename())||empty($student->getThesurname())) return false;
+
+
         try{
 
             $this->db->beginTransaction();
+
+          $sql="UPDATE  thestudent SET thename=?, thesurname=?  WhERE idthestudent=?;";
+               
+
+                     $prepare =$this->db->prepare($sql);
+
+                    $prepare->bindValue(1, $student->getThename(), PDO::PARAM_STR);
+                    $prepare->bindValue(2, $student->getThesurname(), PDO::PARAM_STR);
+                    $prepare->bindValue(3, $student->getIdthestudent(), PDO::PARAM_INT);
+
+
+                    $prepare->execute();
+
+
+                    // comme on ne sais pas l'avance dans quelle section se trouve le stagiaire avant l'envoie du formulaire , on va tout sumplement supprimer toutes les liens entre ce stagiaire et les sections , pour les réinsérés si nécessaire par la suite 
+                    
+
+                    //suppression de tous les entrées liées au stagiaire
+
+
+                    $this->db->exec("DELETE FROM thesection_has_thestudent WHERE thestudent_idthestudent=$getidstudent;");
+
+
+
+                    if(!empty($sections)){
+
+                          $sql="INSERT INTO thesection_has_thestudent
+                          
+                          (thestudent_idthestudent, thesection_idthesection) VALUES ";
+
+                          // tant que l'on a des section 
+
+                          foreach($sections AS $values){
+                              // on dout protegé la valeur contre les injections sql , en cas de non numerique (int) nous donne 0  
+                            $idsection=(int) $values;
+                        // pour eviter l'erreur sql si $id ne vaut pas 0 (pas d'erreurs de conversion)
+                                                  if($idsection!==0){
+                                                      $sql .="($getidstudent,$idsection),";
+
+                                  
+
+
+                              }
+                                 
+
+
+
+                          }
+
+                                 //on supprime la derniére  virgule de l'insert 
+
+                                 $sql =substr($sql, 0,-1);
+                            $this->db->exec($sql);
+
+
+
+                    }
+
+
+
+
+
             $this->db->commit();
             
             return true;
