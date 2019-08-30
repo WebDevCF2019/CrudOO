@@ -38,8 +38,18 @@ if (isset($_GET['disconnect'])) {
      * On veut supprimer une section
      *
      */
+    $deleteId = (int) $_GET['delete'];
 
+     if(!isset($_GET['ok'])){
 
+        $recupSection = $thesectionM->selectionnerSectionParId($deleteId);
+     
+        echo $twig->render ("admin/deleteSection.html.twig",array("user"=>$recupSection));
+    
+    }else{
+        
+
+    
     $deleteId = (int) $_GET['delete'];
 
     // on utilise le manager pour supprimer la section
@@ -47,7 +57,7 @@ if (isset($_GET['disconnect'])) {
 
     header("Location: ./");
 
-
+    }
 
 }elseif (isset($_GET['update'])&&ctype_digit($_GET['update'])&&!empty($_GET['update'])){
 
