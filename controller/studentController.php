@@ -86,13 +86,21 @@ if (isset($_GET['addstudent'])) {
         $sections = (isset($_POST['idthesection']))? $_POST['idthesection']: [];
         
         // on appel la fonction qui effectue l'update d'un student (et qui supprime/ ajoute les sections pour cet étudiant) => argument (thestudent, array, int)
-        
+    
         $update = $thestudentM->updateStudentByIdWithSections($updateStudent,$sections,$idstagiaire);
+         
+        if ($update){
 
+        
         header("Location: ./?adminstudent");
+        }else{
+
+            header("Location: ./?adminstudent&update=".$idstagiaire);
+        }
+
+        }
         
-        
-    }
+    
     
        
     
